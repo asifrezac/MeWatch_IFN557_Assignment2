@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<!-- display contents of user cart -->
+<section>  
+    <div class="container">
+        <div class="row co-12 d-flex mt-2 mb-2">
+            <h3>Products in the cart</h3>
+        </div>
+        <!-- each tour on seperate row -->
+        {% for product in order.watches %}
+        <div class="row m-3 ">
+            <div class="col-sm-9 card p-0 check_out_card">
+                <h5 class="card-header">{{product.name}} <span class="font-weight-light">from {{product.Category.name}}</span></h5>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-4 col-sm-9 m-auto">
+                            <a href="{{ url_for('main.ProductView', productid=product.id)}}">
+                                <img class="img-thumbnail" src="{{url_for('static', filename=('img/' + product.image))}}">
+                            </a>
+                        </div>
+                        <div class="col-lg-7 col-sm-9 m-auto p-2" style="user-select: none; ">
+                            <!-- Item Description -->
+                            <p class="card-text text-left">{{product.description}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br><br>
+            <!-- right column has price and delete button -->
+            <div class="col-sm-2 m-3 d-flex flex-column justify-content-center">
+                <!-- delete item button -->
+                <h5>{{ "$%.2f"|format(product.price) }}</h5>
+                <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                    <input type="hidden" id="id" name="id" value="{{product.id}}">
+                    <input type="submit" value="Delete" class="btn btn-primary mb-3">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <!-- total price and page controls -->
+        <section>
+            <div class="row co-12 d-flex">
+                <h5 class="mt-4">Total price: {{ "$%.2f"|format(totalprice) }}</h5>
+            </div>
+        
+            <div class="row co-12 d-flex mt-2 mb-4">
+                <a href="{{ url_for('main.index', _anchor='Product_anchor') }}" class="btn btn-primary mr-4">Continue Shopping</a>
+                <a href="{{ url_for('main.checkout') }}" class="btn btn-primary mr-4">Checkout</a>
+                <a href="{{ url_for('main.deleteorder') }}" class="btn btn-primary">Empty Basket</a>
+            </div>
+        </section>
+    </div>
+</section>
+{% endblock %}
+

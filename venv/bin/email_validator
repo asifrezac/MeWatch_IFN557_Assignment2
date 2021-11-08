@@ -1,0 +1,10 @@
+#!/bin/sh
+'''exec' "/Users/asifrezachowdhury/Desktop/OneDrive/Academics/QUT Academics/Semester 1-1/IFN557 Rapid Web Dev/Assignment/Assignment 2/n10891188_557_Ass2/venv/bin/python3.9" "$0" "$@"
+' '''
+# -*- coding: utf-8 -*-
+import re
+import sys
+from email_validator import main
+if __name__ == '__main__':
+    sys.argv[0] = re.sub(r'(-script\.pyw|\.exe)?$', '', sys.argv[0])
+    sys.exit(main())

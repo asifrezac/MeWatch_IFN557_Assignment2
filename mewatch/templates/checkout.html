@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+<section>  
+    <div class="container ">
+        <div class="row">
+            <div class = "col-12 mx-auto">
+                <h1 data-aos="fade-up" data-aos-delay="100">Checkout</h1>
+                <p data-aos="fade-up" data-aos-delay="200">
+                    Please provide your details so that one of our awesome sales agent can contact you to take payment and start the shipping process. Thank you! 
+                </p>
+            </div>
+        </div>
+        <div class="row ">
+            <div class = "col-md-4 col-lg-offset-4 mx-auto text-center" data-aos="fade-up" data-aos-delay="300">
+                {{wtf.quick_form(form)}}
+            </div>
+        </div>
+        <hr>
+    </div>
+</section>
+{% endblock %}
